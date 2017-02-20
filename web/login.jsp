@@ -84,7 +84,7 @@
                         session.setAttribute("login",login);
                         session.setAttribute("isaluno",nivel);
                         session.setAttribute("id",lg.selectIdOfMatSen(login));
-                        session.setMaxInactiveInterval(600);
+                        session.setMaxInactiveInterval(300);
                         response.sendRedirect("index.jsp");
                     }else{
                         out.println("<h4>Senha ou Login incorretos !</h4>");
