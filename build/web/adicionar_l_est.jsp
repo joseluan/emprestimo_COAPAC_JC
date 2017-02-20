@@ -63,12 +63,21 @@
                         <a href="meus_emprestimos.jsp">Meus empréstimos</a>
                     </li>
                     <% if(session.getAttribute("isaluno").toString().equals("1")){ %>
-                    <li>
-                        <a href="livros.jsp">Livros</a>
-                    </li>
-                    <li>
-                        <a href="objetos.jsp">Objetos</a>
-                    </li>
+                        <li>
+                            <a href="javascript:;" data-toggle="collapse" data-target="#lista">Listas<i class="fa fa-fw fa-caret-down"></i></a>
+                            <ul id="lista" class="collapse">
+                                <li>
+                                    <span><a href="livros.jsp"><span>Livros</span></a></span>
+                                </li>
+
+                                <li>
+                                    <span><a href="objetos.jsp"><span>Objetos</span></a></span>
+                                </li>
+                                <li>
+                                    <span><a href="usuarios.jsp"><span>Usuários</span></a></span>
+                                </li>
+                            </ul>
+                        </li>
                         <li>
                             <a href="javascript:;" data-toggle="collapse" data-target="#demo">Adicionar <i class="fa fa-fw fa-caret-down"></i></a>
                             <ul id="demo" class="collapse">

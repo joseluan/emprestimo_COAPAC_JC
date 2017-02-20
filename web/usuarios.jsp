@@ -1,9 +1,9 @@
-f<%-- 
-    Document   : editar_p
-    Created on : 25/10/2016, 21:13:29
-    Author     : luan
+<%-- 
+    Document   : usuarios
+    Created on : 20/02/2017, 11:31:09
+    Author     : Luan
 --%>
-
+    
 <%@page import="java.sql.ResultSet"%>
 <%@page import="mysql_bd.Banco"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -11,20 +11,18 @@ f<%--
 <html lang="pt-br">
 
 <head>
-    
-    <% 
-        String reqano = request.getParameter("ano");
-        Banco b = new Banco(); 
-        boolean ok = false;
+ 
+    <% Banco b = new Banco(); 
+       boolean ok = false;
     %>
-    
+   
     <link rel="icon" href="imagens/logoP.png" type="image/x-icon" />
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Página para editar um produto">
+    <meta name="description" content="Lista de todos os livros e atalhos para excluir e editar livros">
     <meta name="author" content="José Luan Silva do Nascimento">
-    
+
     <title>Apoio Acadêmico</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -32,6 +30,7 @@ f<%--
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery/mudarcor.js"></script>
     
     <link href="css/principal.css" rel="stylesheet">
     <style type="text/css">
@@ -46,19 +45,12 @@ f<%--
         ul li{
             display: inline-block;
         }
-        ul#mes li input.btn{
-            width: 175px;
-            height: 70px;
-            font-size: 25pt;
-        }
         input.btn{
-            width: 220px;
+            width: 180px;
             height: 100px;
             font-size: 36pt;
         }
-        input#semestre{
-            width: 320px;
-        }
+        
     </style>
 </head>
 
@@ -66,7 +58,6 @@ f<%--
     <%
         if (session.getAttribute("login") != null) {
     %>
-    <% if(session.getAttribute("isaluno").equals("1")){ %>
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -137,54 +128,52 @@ f<%--
             <!-- /.navbar-collapse -->
         </nav>
         
-        <div id="conteudo" style="margin-top: 60px;">
-            <!-- Page Heading -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">
-                            Alterar Produto
-                        </h1>
-                    </div>
-                    <center>
-                        <form action="editar_l.jsp" method="POST">
-                            
+        <div id="conteudo" style="margin-top: 60px;">    
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    Lista de Usuários/Administradores
+                </h1>
+                <ol class="breadcrumb">
+                    <li>
+                        <i class="fa fa-dashboard"></i>  <a href="index.jsp">Início</a>
+                    </li>
+                    <li class="active">
+                        <i class="fa fa-desktop"></i> Usuários/Administradores
+                    </li>
+                </ol>
+            </div>
+                <center>
+                    
+                    <table class="table table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Matricula</th>
+                                <th>Senha</th>
+                                <th>Tipo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                             <%
-                                ResultSet produto = b.selectAllProdutoofId(request.getParameter("idprodt"));
-                                while(produto.next()){
+                                ResultSet useradmin = b.selectAllUsuario();
+                                while(useradmin.next()){
                             %>
-                                <div class="form-group">
-                                    <label>Nome</label>
-                                    <input name="nome" type="text" class="form-control editarP" placeholder="Digite o nome do seu produto aqui" value="<%=produto.getString("nome")%>">
-                                </div>
-                                <hr/>
-                                <div class="form-group">
-                                    <label>valor</label>
-                                    <textarea name="descricao" type="number" class="form-control editarP" placeholder="Insira a descrição do seu produto"><%=produto.getString("descricao")%></textarea>
-                                </div>
-                                <br/>
-                            <%  } 
-                                produto.close();
+                                <tr>
+                                    <td><%=useradmin.getString("nome")%></td>
+                                    <td><%=useradmin.getString("matricula")%></td>
+                                    <td><%=useradmin.getString("senha")%></td>
+                                    <td><%=useradmin.getString("isaluno")%></td>
+                                </tr>
+                            <% 
+                                }   
+                                useradmin.close();
                             %>
-                        
-                            <hr/>
-                            <input type="hidden" name="id" value="<%=request.getParameter("idprodt")%>">
-                            <input type="submit" value="Editar" class="btn btn-lg btn-warning">
-                            <%
-                                if (request.getParameter("id") != null) {
-                                    b.alterarLivro(request.getParameter("id"), request.getParameter("nome"), request.getParameter("descricao"));
-                                    response.sendRedirect("index.jsp");
-                                }
-                            %>
-                        </form>
-                     </center>
+                        </tbody>
+                    </table>   
+                </center>
         </div>    
-    <%
-    b.conn.close();
-    }else{
-        response.sendRedirect("index.jsp");
-    }
-    %>
-    
-    <% }else{ response.sendRedirect("login.jsp"); } %>
+                <!-- /.row -->
+        </div>    
+    <% b.conn.close(); }else{ response.sendRedirect("login.jsp"); } %>
 </body>
 </html>

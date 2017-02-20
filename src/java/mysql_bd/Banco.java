@@ -135,6 +135,10 @@ public class Banco {
         String sql = "select * from  livro where isLivro = 0";
         return stmt.executeQuery(sql);
     }
+    public ResultSet selectAllUsuario() throws SQLException{
+        String sql = "select * from  usuario";
+        return stmt.executeQuery(sql);
+    }
     public ResultSet selectAllLivroofEstoque() throws SQLException{
         String sql = "select * from livro l inner join estoque est on (l.id = est.id_l_est)"
                 + " where isLivro = 1";
@@ -145,9 +149,9 @@ public class Banco {
                 + " where isLivro = 0";
         return stmt.executeQuery(sql);
     }
-    public ResultSet selectAllLivroofEstoqueIdUser(String id_aluno) throws SQLException{
+    public ResultSet selectAllLivroofEstoqueIdUser(String matricula) throws SQLException{
         String sql = "select * from livro l RIGHT outer join entrega e on (l.id=e.id_livro) left outer join usuario u on (e.id_aluno=u.id) " +
-                     " where matricula = "+id_aluno+
+                     " where matricula = "+matricula+
                      " order by data_ent";
         return stmt.executeQuery(sql);
     }

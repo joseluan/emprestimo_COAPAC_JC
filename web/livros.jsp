@@ -3,13 +3,6 @@
     Created on : 20/10/2016, 23:29:52
     Author     : luan
 --%>
-
-<%-- 
-    Document   : adicionar_produto
-    Created on : 05/10/2016, 20:07:56
-    Author     : luan
---%>
-    
 <%@page import="java.sql.ResultSet"%>
 <%@page import="mysql_bd.Banco"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -86,12 +79,21 @@
                         <a href="meus_emprestimos.jsp">Meus empréstimos</a>
                     </li>
                     <% if(session.getAttribute("isaluno").toString().equals("1")){ %>
-                    <li>
-                        <a href="livros.jsp">Livros</a>
-                    </li>
-                    <li>
-                        <a href="objetos.jsp">Objetos</a>
-                    </li>
+                        <li>
+                            <a href="javascript:;" data-toggle="collapse" data-target="#lista">Listas<i class="fa fa-fw fa-caret-down"></i></a>
+                            <ul id="lista" class="collapse">
+                                <li>
+                                    <span><a href="livros.jsp"><span>Livros</span></a></span>
+                                </li>
+
+                                <li>
+                                    <span><a href="objetos.jsp"><span>Objetos</span></a></span>
+                                </li>
+                                <li>
+                                    <span><a href="usuarios.jsp"><span>Usuários</span></a></span>
+                                </li>
+                            </ul>
+                        </li>
                         <li>
                             <a href="javascript:;" data-toggle="collapse" data-target="#demo">Adicionar <i class="fa fa-fw fa-caret-down"></i></a>
                             <ul id="demo" class="collapse">
