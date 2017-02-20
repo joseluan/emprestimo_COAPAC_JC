@@ -147,7 +147,7 @@ public class Banco {
     }
     public ResultSet selectAllLivroofEstoqueIdUser(String id_aluno) throws SQLException{
         String sql = "select * from livro l RIGHT outer join entrega e on (l.id=e.id_livro) left outer join usuario u on (e.id_aluno=u.id) " +
-                     " where id_aluno = "+id_aluno+
+                     " where matricula = "+id_aluno+
                      " order by data_ent";
         return stmt.executeQuery(sql);
     }
