@@ -1,0 +1,141 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 02/11/2016, 20:40:17
+    Author     : luan
+*/
+form.login{
+    background: url('../imagens/ifrnjc.jpg') no-repeat;
+    background-size: 100% 100%;
+}
+div#conteudo{
+    float: left;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    padding: 5%;
+    padding-top: 0px;
+    margin-top: 60px;
+}
+div#lateralrelatorio{
+    margin: 15px;
+}
+li a{
+    padding: 5px;
+}
+li{
+    padding: 3px;
+    font-size: 12pt;
+}
+a.navbar-brand{
+    font-size: 12pt;
+    padding-top: 3%;
+}
+nav{
+    position: fixed;
+    float: top;
+    height: 7%;
+}
+.collapse{
+    transition: font-size 1s;
+    -webkit-transition: font-size 1s; /* Safari 3.1 to 6.0 */
+    background-color: #222;
+    list-style: none;
+}
+.collapse li span{
+    transition: font-size 0.2s;
+    -webkit-transition: font-size 0.2s; /* Safari 3.1 to 6.0 */
+    font-size: 14pt;
+    color: #9d9d9d;
+}
+.collapse li span:hover{
+    font-size: 15pt;
+    color: #fff;
+}
+ul#menulateral li{
+    font-size: 15pt;
+    padding: 0px;
+    transition: font-size 0.2s;
+    -webkit-transition: font-size 0.2s; /* Safari 3.1 to 6.0 */
+}
+ul#menulateral li:hover{
+    font-size: 17pt;
+    text-decoration: underline;
+}
+ul#menulateral li ul li a{
+    margin: 0px;
+    padding: 10px;
+}
+ul#menulateral li ul li{
+    padding: 10px;
+    padding-bottom: 5px;
+}
+p{
+    text-allign: 40px;
+    font-size: 13pt;
+}
+input.btn{
+    width: 220px;
+    height: 100px;
+    font-size: 36pt;
+}
+input#semestre{
+     width: 320px;
+}
+label{
+    font-size: 20pt;
+}
+tr td{
+    font-size: 20pt;
+}
+tr th{
+    font-size: 18pt;
+}
+.verde{
+    color: mediumseagreen;
+}
+div#azul{
+    margin: 0px 5px 0px 5px;
+    width: 285px;
+    border-radius: 15px;
+    border: 3px solid #337ab7;
+    color: #337ab7;
+}
+div#amarelo{
+    margin: 0px 5px 0px 5px;
+    width: 285px;
+    border-radius: 15px;
+    border: 3px solid #f0ad4e;
+    color: #f0ad4e;
+}
+div#vermelho{
+    margin: 0px 5px 0px 5px;
+    width: 285px;
+    border-radius: 15px;
+    border: 3px solid #d9534f;
+    color: #d9534f;
+}
+div#verde{
+    margin: 0px 5px 0px 5px;
+    width: 285px;
+    border-radius: 15px;
+    border: 3px solid #5cb85c;
+    color: #5cb85c;
+}
+ul.infor li {
+    width: 350px;
+    height: 100px;
+    margin-bottom: 15px;
+}
+.editarP{
+    width: 75%;
+}
+.semestre{
+    width: 200px;
+}
+div.container{
+    background-color: #fff;
+}
