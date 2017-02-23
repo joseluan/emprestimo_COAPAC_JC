@@ -32,7 +32,17 @@
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    
+    <script>
+        $(document).ready(function(){
+            $('input#livro').click(function(){
+                $('div#divvolume').css('opacity',1);
+            });
+            $('input#objeto').click(function(){
+                $('div#divvolume').css('opacity',0);
+            });
+            
+        });
+    </script>
     <link href="css/principal.css" rel="stylesheet">
     <style type="text/css">
         p{
@@ -136,7 +146,7 @@
         </nav>
         
         <div id="conteudo" style="margin-top: 60px;">
-                        <% 
+                    <% 
                         if (request.getParameter("nome") != null) {
                                 String nome = request.getParameter("nome");
                                 String descricao = request.getParameter("descricao");
@@ -145,22 +155,10 @@
                                 try{
                                     b.addLivro(nome, descricao, volume,isLivro);
                                     ok = true;
-                         %>
-                        <script>
-                            alert("Produto Cadastrado");
-                        </script>
-                        <%
                                 }catch(Exception qsle){
-                        %>
-                        <script>
-                            alert("Produto não Cadastrado");
-                        </script>
-                        <% 
                                     ok = false;
-                                }
-                                
-                        }
-                        
+                                }     
+                        }       
                         if (ok == true) {
                     %>
                         <div class="alert alert-success">
@@ -199,7 +197,7 @@
                             <table border="0">
                                 <tr>
                                     <td>
-                                        <div class="form-group">
+                                        <div id="divvolume" class="form-group">
                                             <label>Volume</label>
                                             <div class="radio">
                                                 <label>
@@ -225,10 +223,10 @@
                                             <label>É um livro?</label>
                                             <div class="radio">
                                                 <label>
-                                                    <input type="radio" name="isLivro" id="" value="1" checked>Sim
+                                                    <input onchange="isLivro()" type="radio" name="isLivro" id="livro" value="1" checked>Sim
                                                 </label>
                                                 <label>
-                                                    <input type="radio" name="isLivro" id="" value="0">Não
+                                                    <input type="radio" name="isLivro" id="objeto" value="0">Não
                                                 </label>
                                             </div>
                                         </div>
