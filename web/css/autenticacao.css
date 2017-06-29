@@ -1,0 +1,42 @@
+body{
+    background: #656565;
+}
+div.container{
+    background: #fff;
+}
+form{
+    padding-left: 25px;
+    padding-right: 25px;
+}
+img#logo{
+    margin: 0px;
+}
+label{
+    font-size: 18pt;
+}
+@media screen and (max-width: 992px){
+    div.container{
+        border: 3px solid #5cb85c;
+        border-radius: 10px;
+        width: 100%;
+        padding: 10px 0px 10px 0px;
+        margin-bottom: 15px;
+        margin-top: 1%;
+        -webkit-box-shadow: 8px 9px 5px -3px rgba(18,38,97,0.38);
+        -moz-box-shadow: 8px 9px 5px -3px rgba(18,38,97,0.38);
+        box-shadow: 8px 9px 5px 0px rgba(18,38,97,0.38);
+    }
+}
+@media screen and (min-width: 992px){
+    div.container{
+        border: 3px solid #5cb85c;
+        border-radius: 10px;
+        width: 75%;
+        padding: 10px 0px 10px 0px;
+        margin-bottom: 15px;
+        margin-top: 1%;
+        -webkit-box-shadow: 8px 9px 5px -3px rgba(18,38,97,0.38);
+        -moz-box-shadow: 8px 9px 5px -3px rgba(18,38,97,0.38);
+        box-shadow: 8px 9px 5px 0px #454545;
+    }
+}

@@ -5,11 +5,10 @@ and open the template in the editor.
 */
 /* 
     Created on : 02/11/2016, 20:40:17
-    Author     : luan
+    Author     : josé luan silda do nascimento
 */
 form.login{
-    background: url('../imagens/ifrnjc.jpg') no-repeat;
-    background-size: 100% 100%;
+    background: #cdcdcd;
 }
 div#conteudo{
     float: left;
@@ -56,13 +55,13 @@ nav{
     color: #fff;
 }
 ul#menulateral li{
-    font-size: 15pt;
+    font-size: 13pt;
     padding: 0px;
     transition: font-size 0.2s;
     -webkit-transition: font-size 0.2s; /* Safari 3.1 to 6.0 */
 }
 ul#menulateral li:hover{
-    font-size: 17pt;
+    font-size: 14pt;
     text-decoration: underline;
 }
 ul#menulateral li ul li a{
@@ -75,7 +74,7 @@ ul#menulateral li ul li{
 }
 p{
     text-allign: 40px;
-    font-size: 13pt;
+    font-size: 12pt;
 }
 input.btn{
     width: 220px;

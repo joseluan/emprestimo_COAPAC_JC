@@ -1,10 +1,5 @@
-<%-- 
-    Document   : cadastrar_usuario
-    Created on : 29/01/2017, 20:31:18
-    Author     : Luan
---%>
-<%@page import="login.autenticacao.Login"%>
-<%@page import="mysql_bd.Banco"%>
+<%@page import="login_conexao.Login"%>
+<%@page import="metodos_conexao.Banco"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -17,7 +12,7 @@
         <meta name="description" content="Página de cadastro do usuário">
         <meta name="author" content="José Luan Silva do Nascimento">
 
-        <title>Apoio Acadêmico</title>
+        <title>COAPAC-CADASTRO</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -26,23 +21,18 @@
         <script src="js/jquery.js"></script>
         <script src="js/bootstrap.min.js"></script>
 
-        <link href="css/principal.css" rel="stylesheet">
-        <style type="text/css">
+        <link href="css/autenticacao.css" rel="stylesheet">
+        <style type="text/css"> 
+            @media screen and (max-width: 992px){
+                img#logo{
+                    width: 100%;
+                }
+            }
             img{
                 margin: 25px;
                 margin-top: 50px;
             }
-            div.container{
-                border: 3px solid #5cb85c;
-                border-radius: 10px;
-                width: 50%;
-                padding: 10px 0px 10px 0px;
-                margin-bottom: 15px;
-                margin-top: 1%;
-                -webkit-box-shadow: 8px 9px 5px -3px rgba(18,38,97,0.38);
-                -moz-box-shadow: 8px 9px 5px -3px rgba(18,38,97,0.38);
-                box-shadow: 8px 9px 5px -3px rgba(18,38,97,0.38);
-            }
+
             label{
                 color: #5cb85c;
             }
@@ -52,13 +42,16 @@
             b:hover{
                 color: #3a963a;
             }
+            input#cadastrar{
+                margin-bottom: 25px;
+            }
         </style>
     </head>
-    <body>
-        <form action="cadastrar_aluno.jsp" method="post" class="login">
-          <center>
-              <br/>
-                <div class="container">
+    <body> 
+        <div class="container">
+            <form action="cadastrar_aluno.jsp" method="POST" class="login">
+                <center>
+                    <img id="logo" src="imagens/logo.png" title="Logo do Instituto Federal de Educação, Ciência e Tecnologia Rio Grande do Norte, Campus João Câmara">
                     <div class="form-group">
                         <label><b><h2>Cadastrar Usuário</h2></b></label>
                     </div>
@@ -68,44 +61,57 @@
                             String senha = request.getParameter("senha");
                             String cfsenha = request.getParameter("cfsenha");
                             String matricula = request.getParameter("matricula");
+                            String email = request.getParameter("email");
                             Login lg = new Login();
                             if (!senha.equals(cfsenha)) {
                                 out.println("<h4>As senhas não correspondem</h4>");
-                                if(lg.existUser(matricula)){
+                                if (lg.existUser(matricula)) {
                                     out.println("<h4>Usuário já cadastrado</h4>");
                                 }
-                            }else{
-                                if(lg.existUser(matricula)){
+                            } else {
+                                if (lg.existUser(matricula)) {
                                     out.println("<h4>Usuário já cadastrado</h4>");
-                                }else{
+                                } else {
                                     Banco b = new Banco();
-                                    b.cadastrarUserAdmin(matricula,nome, senha, "0");
+                                    b.cadastrarUserAdmin(matricula, nome, email, senha, "0");
                                     b.conn.close();
                                     response.sendRedirect("login.jsp");
-                                }   
+                                }
                             }
-                            lg.conn.close();    
+                            lg.conn.close();
                         }
                     %>
-                    <div class="form-group">
-                        <label><b>Nome</b></label>
-                        <input type="text" style="width: 75%" class="form-control" placeholder="Digite o seu nome" name="nome" required>
+                    <div class="row">
+                        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                            <label><b>Nome</b></label>
+                            <input type="text" class="form-control" placeholder="Digite o seu nome" name="nome" required>
+                        </div>
+                        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                            <label><b>Matricula</b></label>
+                            <input type="number" class="form-control" placeholder="Digite sua matricula" name="matricula" required>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label><b>matricula</b></label>
-                        <input type="number" style="width: 75%" class="form-control" placeholder="Digite sua matricula" name="matricula" required>
+
+                    <div class="row">
+                        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                            <label><b>Senha</b></label>
+                            <input type="password" min="8" class="form-control" placeholder="Digite a senha" name="senha" required>
+                        </div>
+                        <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                            <label><b>Confirmar senha</b></label>
+                            <input type="password" min="8" class="form-control" placeholder="Confirme a senha" name="cfsenha" required>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label><b>Senha</b></label>
-                        <input type="password" style="width: 75%" class="form-control" placeholder="Digite a senha" name="senha" required>
+
+                    <div class="row">
+                        <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                            <label><b>E-mail</b></label>
+                            <input type="email" class="form-control" placeholder="Digite seu e-mail" name="email" required>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label><b>Confirmar senha</b></label>
-                        <input type="password" style="width: 75%" class="form-control" placeholder="confirme a senha" name="cfsenha" required>
-                    </div>
-                </div>
-              <input type="submit" style="width: 35%;" class="btn btn-lg btn-success" value="Cadastrar" title="Clique aqui para entrar no sistema" /> 
-          </center>
-      </form>
+                    <input type="submit" class="btn btn-lg btn-success" value="Cadastrar" title="Clique aqui para cadastrar um usuário" id="cadastrar"/> 
+                </center>
+            </form>
+        </div>
     </body>   
 </html>
