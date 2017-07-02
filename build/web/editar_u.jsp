@@ -93,12 +93,11 @@
                 </div>
             </div> 
             <center>
-                <form action="editar_u.jsp" method="POST">
-
-                    <%
-                        ResultSet user = b.selectUsuarioOfMatricula(session.getAttribute("login").toString());
-                        while (user.next()) {
-                    %>
+                <%
+                    ResultSet user = b.selectUsuarioOfMatricula(session.getAttribute("login").toString());
+                    while (user.next()) {
+                %>
+                <form action="editar_u.jsp" method="POST">  
                     <div class="row"> 
                         <div class="col-lg-7 col-md-6 col-sm-12">
                             <div class="form-group">
@@ -128,19 +127,14 @@
                         </div>
                     </div>
                     <input type="hidden" value="<%=user.getString("id")%>" name="id"/>
+
                     <br/>
-                    <%  }
-                        user.close();
-                    %>
 
                     <input type="hidden" name="matricula" value="<%=session.getAttribute("login")%>">
                     <input type="submit" value="Editar" class="btn btn-md btn-warning">
                 </form>
-                <form action="editar_u.jsp" method="POST">
-                    <input type="hidden" name="id2" value="<%=session.getAttribute("login")%>">
-                    <input type="submit" value="Excluir" class="btn btn-md btn-danger" style="margin-top: 10px;">
-                    <%
-                        if (request.getParameter("id2") != null) {
+                <%
+                        if (request.getParameter("id2") != null && (!user.getString("isaluno").equals("0"))) {
                             b.excluirAdminUser(request.getParameter("id2"));
 
                             session.removeAttribute("login");
@@ -149,9 +143,17 @@
                             session.removeAttribute("nome");
 
                             response.sendRedirect("login.jsp");
-                        }
-                    %>
+                %>
+                <form action="editar_u.jsp" method="POST">
+                    <input type="hidden" name="id2" value="<%=session.getAttribute("login")%>">
+                    <input type="submit" value="Excluir" class="btn btn-md btn-danger" style="margin-top: 10px;">
                 </form>
+
+                <%
+                        }
+                    }
+                    user.close();
+                %>
             </center>
 
             <%

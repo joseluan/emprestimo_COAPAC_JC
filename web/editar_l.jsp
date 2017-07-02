@@ -78,7 +78,7 @@
                         </div>
                         <hr/>
                         <div class="form-group">
-                            <label>valor</label>
+                            <label>Descrição</label>
                             <textarea name="descricao" type="number" class="form-control editarP" placeholder="Insira a descrição do seu produto"><%=produto.getString("descricao")%></textarea>
                         </div>
                         <br/>
@@ -92,21 +92,20 @@
                         <%
                             if (request.getParameter("id") != null) {
                                 b.alterarLivro(request.getParameter("id"), request.getParameter("nome"), request.getParameter("descricao"));
-                                response.sendRedirect("index.jsp");
+                                response.sendRedirect("objetos.jsp");
                             }
                         %>
                     </form>
                 </center>
             </div>    
             <%
-                    b.conn.close();
+                        b.conn.close();
+                    } else {
+                        response.sendRedirect("index.jsp");
+                    }
                 } else {
-                    response.sendRedirect("index.jsp");
+                    response.sendRedirect("login.jsp");
                 }
             %>
-
-            <% } else {
-            response.sendRedirect("login.jsp");
-        }%>
     </body>
 </html>

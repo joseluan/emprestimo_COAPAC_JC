@@ -69,9 +69,10 @@
                     <div class="row" title="Mês do relatório">
                         <!-- mês -->
                         <div class="form-group col-lg-6 col-md-8 col-sm-12">
+                            <label>Mês: </label>
                             <select name="mes" class="form-control">
                                 <option value="0" selected>Todos</option>
-                                <option value="01">Janneiro</option>
+                                <option value="01">Janeiro</option>
                                 <option value="02">Fevereiro</option>
                                 <option value="03">Março</option>
                                 <option value="04">Abril</option>
@@ -88,6 +89,7 @@
 
                         <!-- ano -->
                         <div class="form-group col-lg-6 col-md-8 col-sm-12">
+                            <label>Ano: </label>
                             <select name="ano" class="form-control" title="Ano do relatório">
                                 <% for (int i = 2017; i <= 2050; i++) {%>
                                 <option value="<%=i%>"><%=i%></option>
@@ -98,11 +100,13 @@
                     <div class="row">
                         <!-- matricula -->
                         <div class="form-group col-lg-6 col-md-8 col-sm-12">
+                             <label>Matricula: </label>
                             <input type="number" class="form-control" placeholder="digite aqui a matricula do aluno" name="matricula" title="Matricula do aluno"/>
-                        </div>
-
+                        </div>    
+                    </div>
+                    <div class="row">
                         <!-- botao submit -->
-                        <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                        <div class="form-group col-lg-12 col-md-12 col-sm-12">
                             <input type="submit" class="btn btn-success" value="Gerar Relatório"
                                    title="Clique aqui para gerar um relatório de cópias" />
                         </div>

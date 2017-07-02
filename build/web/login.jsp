@@ -30,7 +30,7 @@
             }
             @media screen and (min-width: 992px){
                 div.container{
-                    width: 50%;
+                    width: 40%;
                 }
             }
             label{
@@ -73,13 +73,17 @@
                     <img id="logo" src="imagens/logo.png" title="Logo do Instituto Federal de Educação, Ciência e Tecnologia Rio Grande do Norte, Campus João Câmara">
                     <br/>
                     <label><b>COAPAC - Login</b></label>
-                    <div class="form-group">
-                        <label><b>Matricula</b></label>
-                        <input type="number" style="width: 95%" class="form-control" placeholder="Digite sua matricula" name="login" required>
+                    <div class="row">
+                        <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                            <label><b>Matricula</b></label>
+                            <input type="number" style="width: 95%" class="form-control" placeholder="Digite sua matricula" name="login" required>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label><b>Senha</b></label>
-                        <input type="password" min="8" style="width: 95%" class="form-control" placeholder="Digite a senha" name="senha" required>
+                    <div class="row">
+                        <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                            <label><b>Senha</b></label>
+                            <input type="password" min="8" style="width: 95%" class="form-control" placeholder="Digite a senha" name="senha" required>
+                        </div>
                     </div>
                     <%
                         String login = request.getParameter("login");
@@ -106,10 +110,38 @@
                             b.conn.close();
                         }
                     %>
-                    <h3><b><a style="color: #3a963a;" href="cadastrar_aluno.jsp" target="_blank" title="Clique aqui para cadastrar um usuário">Cadastrar um usuário</a></b></h3>
-                    <h3><b><a style="color: #3a963a;" href="recuperar_senha.jsp" target="_blank" title="Clique aqui para recuperar sua senha">Esqueceu a senha?</a></b></h3>
-                    <br/>
-                    <input type="submit" id="botao" class="btn btn-md btn-success" value="Entrar" title="Clique aqui para entrar no sistema" /> 
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <h3>
+                                <b>
+                                    <a style="color: #3a963a;" 
+                                       href="cadastrar_aluno.jsp" 
+                                       target="_blank" 
+                                       title="Clique aqui para cadastrar um usuário">
+                                        Cadastrar um usuário
+                                    </a>
+                                </b>
+                            </h3>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <h3>
+                                <b>
+                                    <a style="color: #3a963a;"
+                                       href="recuperar_senha.jsp"
+                                       target="_blank"
+                                       title="Clique aqui para recuperar sua senha">
+                                        Esqueceu a senha?
+                                    </a>
+                                </b>
+                            </h3>
+                        </div>
+                    </div>    
+                     
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <input type="submit" id="botao" class="btn btn-md btn-success" value="Entrar" title="Clique aqui para entrar no sistema" /> 
+                        </div>
+                    </div>
                 </center>
             </form>
         </div>

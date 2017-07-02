@@ -2,15 +2,15 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
     <head>
         <% Banco b = new Banco(); %>
 
-        <link rel="icon" href="imagens/logoP.png" type="image/x-icon" />
+        <link rel="icon" href="imagens/logoP.png" type="image/x-icon" />>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="Relatório de empréstimos da COAPAC">
+        <meta name="description" content="Tabela de escolha do mês, ano e matricula do relatório de empréstimos">
         <meta name="author" content="José Luan Silva do Nascimento">
 
         <title>COAPAC-RELATÓRIO</title>
@@ -21,63 +21,76 @@
         <script src="js/jquery.js"></script>
         <script src="js/bootstrap.min.js"></script>
 
-        <link href="css/principal.css" rel="stylesheet">  
-
+        <link href="css/principal.css" rel="stylesheet">
+        <style type="text/css">
+            p{
+                text-indent: 40px;
+                font-size: 14pt;
+                text-align: justify;
+            }
+            ul{
+                list-style:none;
+            }
+            ul li{
+                display: inline-block;
+            }
+            input.btn{
+                width: 250px;
+                height: 75px;
+                font-size: 24pt;
+            }
+        </style>
     </head>
     <body>
         <%
             if (session.getAttribute("login") != null) {
         %>
-        <div class="container">
-            <center>
-                <div id="page-wrapper">
-                    <div class="row" style="width: 95%;">
-                        <img style="margin-top: 25px;" src="imagens/brasao.jpg"/>
-                        <h3>Instituto Federal de Educação, Ciência e Tecnologia Rio Grande do Norte, Campus João Câmara</h3>
-                        <h3>Direção Geral</h3>
-                        <h3>Coordenação de Apoio Acadêmico</h3>
 
-                        <b><h4>Empréstimos feitos para <%=session.getAttribute("nome").toString()%></h4></b>
-                        <table class="table table-responsive" style="width: 90%;">
-                            <thead>
-                                <tr>
-                                    <th><h3>Nome</h3></th>
-                                    <th><h3>Volume</h3></th>
-                                    <th><h3>Descrição</h3></th>
-                                    <th><h3>Data</h3></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <%
-                                    ResultSet livros = b.selectAllLivroofEstoqueIdUser(session.getAttribute("id").toString());
-                                    int numemprestimo = 0;
-                                    while (livros.next()) {
-                                        numemprestimo++;
-                                %>
-                                <tr>
-                                    <td><h3><%=livros.getString("nome_livro")%></h3></td>
-                                    <td><h3><%=livros.getString("volume_livro")%></h3></td>
-                                    <td><h3><%=livros.getString("descricao_livro")%></h3></td>
-                                    <td><h3><%=livros.getString("data_ent")%></h3></td>
-                                </tr>   
-                                <%  }
-                                livros.close();%>
-                            </tbody>
-                        </table>
-                        <br/>
-                    </div>
+        <jsp:include page="jspf/menu_barra.jsp"/>
 
-                </div>
-            </center>
-            <div class="row">
-                <div class="col-lg-6 col-md-12 col-sm-12">
-                    <h3>Número de registros = <%=numemprestimo%> </h3>
-                </div>
+        <div id="conteudo" style="margin-top: 60px;">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    Relatório de empréstimos
+                </h1>
+                <ol class="breadcrumb">
+                    <li>
+                        <i class="fa fa-dashboard"></i>  <a href="index.jsp">Início</a>
+                    </li>
+                    <li class="active">
+                        <i class="fa fa-desktop"></i> relatório de empréstimos
+                    </li>
+                </ol>
             </div>
-        </div> 
+
+            <!-- Formulários -->
+            <center>
+                <form action="emprestimo_mes_ano.jsp" method="POST" target="_blank">
+                    <div class="row">
+                        <!-- ano -->
+                        <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                            <label>Ano: </label>
+                            <select style="font-size: 30pt; width: 200px; height: 80px;" name="ano" class="form-control" title="Ano do relatório">
+                                <option value="0" selected>Todos</option>
+                                <% for (int i = 2017; i <= 2050; i++) {%>
+                                    <option value="<%=i%>"><%=i%></option>
+                                <% } %>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- botao submit -->
+                        <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                            <input type="submit" class="btn btn-success" value="Gerar Relatório"
+                                   title="Clique aqui para gerar um relatório de empréstimo" />
+                        </div>
+                    </div>
+                </form>
+            </center>
+        </div>
         <% b.conn.close();
             } else {
                 response.sendRedirect("login.jsp");
-            }%>
+            }%>        
     </body>
 </html>

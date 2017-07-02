@@ -86,13 +86,13 @@
                             <th>Matricula</th>
                             <th>E-mail</th>
                             <th>Nivel</th>
-                            <th>Cópia</th>
-                            <th></th>
+                            <th>Nº de cópias</th>
+                            <th>Ação</th>
                         </tr>
                     </thead>
                     <tbody>
                         <%
-                            ResultSet useradmin = b.selectUsuarioOfIdLike(request.getParameter("matricula"));
+                            ResultSet useradmin = b.selectUsuarioOfMatriculaLike(request.getParameter("matricula"));
                             while (useradmin.next()) {
                         %>
                         <tr>
@@ -100,7 +100,7 @@
                             <td><%=useradmin.getString("matricula")%></td>
                             <td><%=useradmin.getString("email")%></td>
                             <td><%=useradmin.getString("isaluno")%></td>
-                            <td><td><%=useradmin.getString("copia")%> cópias</td></td>
+                            <td><%=useradmin.getString("copia")%> cópias</td>
                             <td>
                                 <form action="copia.jsp" method="POST">
                                     <table>

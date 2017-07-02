@@ -48,6 +48,9 @@
         </style>
     </head>
     <body> 
+        <%
+            if (session.getAttribute("login") != null) {
+                if (session.getAttribute("isaluno").equals("1") || session.getAttribute("isaluno").equals("2")) { %>
         <div class="container">
             <form action="cadastrar_admin.jsp" method="POST" class="login">
                 <center>
@@ -75,7 +78,7 @@
                                     Banco b = new Banco();
                                     b.cadastrarUserAdmin(matricula, nome, email, senha, "1");
                                     b.conn.close();
-                                    response.sendRedirect("login.jsp");
+                                    response.sendRedirect("index.jsp");
                                 }
                             }
                             lg.conn.close();
@@ -113,5 +116,13 @@
                 </center>
             </form>
         </div>
+        <%
+                } else {
+                    response.sendRedirect("index.jsp");
+                }
+            } else {
+                response.sendRedirect("login.jsp");
+            }
+        %>
     </body>   
 </html>

@@ -105,7 +105,7 @@
                         <tbody>
                             <%
                                 if (request.getParameter("matricula") != null) {
-                                    ResultSet objetos = b.selectAllLivroofEstoqueMatriculaUser(request.getParameter("matricula"));
+                                    ResultSet objetos = b.selectAllEntregaofMatriculaUser(request.getParameter("matricula"));
                                     while (objetos.next()) {
                                         String nome = b.selectNomeUserOfId(objetos.getString("id_aluno"));
                             %>

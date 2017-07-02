@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package metodos_conexao;
 
 import java.sql.Statement;
@@ -13,16 +8,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Calendar;
 
-/**
- *
- * @author luan
- */
 public class Banco {
 
     private static Statement stmt;
     private static Statement stmt2;
     public Connection conn;
-    private static final Banco b = new Banco();
 
     public Banco() {
         String url = "jdbc:mysql://localhost:3306/livrosapoio";
@@ -141,6 +131,7 @@ public class Banco {
                 + " and nome LIKE '%" + nome + "%'";
         return stmt.executeQuery(sql);
     }
+
     public ResultSet selectAllObjetoNomePegar(String nome) throws SQLException {
         String sql = "select * from  livro l inner join estoque e on (l.id = e.id_l_est)"
                 + " where isLivro = 0"
@@ -155,6 +146,7 @@ public class Banco {
                 + " and nome LIKE '%" + nome + "%'";
         return stmt.executeQuery(sql);
     }
+
     public ResultSet selectAllLivroNomePegar(String nome) throws SQLException {
         String sql = "select * from  livro l LEFT outer join estoque e on (l.id = e.id_l_est)"
                 + "where isLivro = 1"
@@ -193,23 +185,29 @@ public class Banco {
         return stmt.executeQuery(sql);
     }
 
-    public ResultSet selectAllLivroofEstoqueIdUser(String id) throws SQLException {
-        String sql = "select * from livro l RIGHT outer join entrega e on (l.id=e.id_livro) left outer join usuario u on (e.id_aluno=u.id) "
-                     + " where id_aluno = " + id
-                     + " order by e.data_ent";
-        if (id.equals("")) {
+    public ResultSet selectAllEntregaofIdUser(String ano, String id) throws SQLException {
+        String sql;
+        if (ano.equals("0")) {
             sql = "select * from livro l RIGHT outer join entrega e on (l.id=e.id_livro) left outer join usuario u on (e.id_aluno=u.id) "
-                  + " order by e.data_ent";
+                    + " where e.id_aluno = " + id
+                    + " order by e.data_ent";
+        } else {
+            sql = "select * from livro l RIGHT outer join entrega e on (l.id=e.id_livro) left outer join usuario u on (e.id_aluno=u.id) "
+                    + " where e.data_ent between date('" + ano + "-01-01') and date('" + ano + "-12-31') "
+                    + " and e.id_aluno = " + id
+                    + " order by e.data_ent";
         }
+
         return stmt.executeQuery(sql);
     }
-    public ResultSet selectAllLivroofEstoqueMatriculaUser(String matricula) throws SQLException {
+
+    public ResultSet selectAllEntregaofMatriculaUser(String matricula) throws SQLException {
         String sql = "select * from livro l RIGHT outer join entrega e on (l.id=e.id_livro) left outer join usuario u on (e.id_aluno=u.id) "
-                     + " where matricula LIKE '%"+ matricula +"%'"
-                     + " order by e.data_ent";
+                + " where matricula LIKE '%" + matricula + "%'"
+                + " order by e.data_ent";
         if (matricula.equals("")) {
             sql = "select * from livro l RIGHT outer join entrega e on (l.id=e.id_livro) left outer join usuario u on (e.id_aluno=u.id) "
-                  + " order by e.data_ent";
+                    + " order by e.data_ent";
         }
         return stmt.executeQuery(sql);
     }
@@ -266,13 +264,13 @@ public class Banco {
         return stmt.executeQuery(sql);
     }
 
-    public ResultSet selectUsuarioOfIdLike(String id) throws SQLException {
+    public ResultSet selectUsuarioOfMatriculaLike(String matricula) throws SQLException {
         String sql;
-        if ("".equals(id)) {
+        if ("".equals(matricula)) {
             sql = "select * from usuario where isaluno != 2";
         } else {
             sql = "select * from usuario "
-                    + "where matricula LIKE '%" + id + "%'"
+                    + "where matricula LIKE '%" + matricula + "%'"
                     + " and isaluno != 2";
         }
         return stmt.executeQuery(sql);
@@ -281,6 +279,14 @@ public class Banco {
     public ResultSet selectUsuarioOfId(String id) throws SQLException {
         String sql = "select * from usuario "
                 + " where id = " + id
+                + " and isaluno != 2";
+
+        return stmt.executeQuery(sql);
+    }
+
+    public ResultSet selectUsuarioOfMatricula(String matricula) throws SQLException {
+        String sql = "select * from usuario "
+                + " where matricula = " + matricula
                 + " and isaluno != 2";
 
         return stmt.executeQuery(sql);
@@ -299,7 +305,7 @@ public class Banco {
     }
 
     public int selectCopiaUsuariofdId(String id) throws SQLException {
-        String sql = "select copia from usuario where id = "+id;
+        String sql = "select copia from usuario where id = " + id;
         ResultSet rs2 = stmt2.executeQuery(sql);
         while (rs2.next()) {
             return rs2.getInt("copia");
@@ -315,7 +321,7 @@ public class Banco {
         }
         return null;
     }
-    
+
     public String selectQuantidadeEstoqueOfId(String id) throws SQLException {
         String sql = "select quantidade from estoque where id_l_est = " + id;
         ResultSet rs2 = stmt2.executeQuery(sql);
@@ -324,7 +330,7 @@ public class Banco {
         }
         return null;
     }
-    
+
     public String selectNomeUserOfMatricula(String matricula) throws SQLException {
         String sql = "select nome from usuario where matricula = " + matricula;
         ResultSet rs2 = stmt2.executeQuery(sql);

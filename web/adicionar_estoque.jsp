@@ -37,6 +37,7 @@
     <body>
         <%
             if (session.getAttribute("login") != null) {
+                if (session.getAttribute("isaluno").equals("1") || session.getAttribute("isaluno").equals("2")) { %>
         %>
         <jsp:include page="jspf/menu_barra.jsp"/>
 
@@ -59,26 +60,43 @@
                         String id = request.getParameter("id");
                         String quantidade = request.getParameter("quantidade");
                         String quantidade_estoque = b.selectQuantidadeEstoqueOfId(id);
-                        
-                        if (( Integer.parseInt(quantidade_estoque) + Integer.parseInt(quantidade) ) >= 0) {
-                             b.addOEstoque(id, quantidade);
+                        try {
+                            if ((Integer.parseInt(quantidade_estoque)
+                                    + Integer.parseInt(quantidade)) >= 0) {
+
+                                b.addOEstoque(id, quantidade);
                 %>
-                            <div class="alert alert-success">
-                                <h4>A quantidade de Objeto/Livro foi adicionada com sucesso.</h4>
-                            </div>
+                                <div class="alert alert-success">
+                                    <h4>A quantidade de Objeto/Livro foi adicionada com sucesso.</h4>
+                                </div>
+                            <%
+                            } else {
+                            %>
+                                <div class="alert alert-danger">
+                                    <h4>O valor final da quantidade de cópias é negativo! digite outro valor</h4>
+                                </div>
                 <%
-                        }else{
+                            }
+                        } catch (NumberFormatException n) {
+                            if (Integer.parseInt(quantidade) >= 0) {
+                                b.addOEstoque(id, quantidade);
+                            
                 %>
-                            <div class="alert alert-danger">
-                                <h4>O valor final da quantidade de cópias é negativo! digite outro valor</h4>
-                            </div>
+                                <div class="alert alert-success">
+                                    <h4>A quantidade de Objeto/Livro foi adicionada com sucesso.</h4>
+                                </div>
+                <%          }else{ %>
+                                <div class="alert alert-danger">
+                                    <h4>O valor final da quantidade de cópias é negativo! digite outro valor</h4>
+                                </div>
                 <%
+                            }
                         }
                     }
                 %>
             </div>
             <center>
-                <form action="adicionar_estoque.jsp" method="POST">
+                <form action="adicionar_estoque.jsp" method="get">
 
                     <div class="form-group">
                         <label>Objeto/LIvro</label>
@@ -109,7 +127,11 @@
                 </form>
             </center> 
         </div>    
-        <% b.conn.close();
+        <%
+                    b.conn.close();
+                } else {
+                    response.sendRedirect("index.jsp");
+                }
             } else {
                 response.sendRedirect("index.jsp");
             }%>

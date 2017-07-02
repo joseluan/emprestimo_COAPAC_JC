@@ -61,7 +61,7 @@
     <body>
         <%
             if (session.getAttribute("login") != null) {
-        %>
+                if (session.getAttribute("isaluno").equals("1") || session.getAttribute("isaluno").equals("2")) { %>
 
         <jsp:include page="jspf/menu_barra.jsp"/>
 
@@ -143,7 +143,11 @@
                 </form>
             </center>
         </div>    
-        <% b.conn.close();
+        <%
+                    b.conn.close();
+                } else {
+                    response.sendRedirect("index.jsp");
+                }
             } else {
                 response.sendRedirect("login.jsp");
             }%>

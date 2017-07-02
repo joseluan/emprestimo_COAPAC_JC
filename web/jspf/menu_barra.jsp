@@ -35,7 +35,7 @@
                     Relatórios <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="relatorio_emprestimos.jsp" target="_blank">Empréstimos</a></li>
+                    <li><a href="relatorio_emprestimos.jsp">Empréstimos</a></li>
                         <% if (session.getAttribute("isaluno").equals("1") || session.getAttribute("isaluno").equals("2")) { %>
                     <li> <a href="relatorio_copia.jsp">Cópias</a> </li>
                         <% } %>
